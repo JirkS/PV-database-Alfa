@@ -60,13 +60,13 @@
 ## Hlavní Třídy
 Třídy:
   1. Type_of_job
-  Atributy:
-  title: str
-  job_description: str
-  employment_type: str
-  Metody:
-__init__(self, title: str, job_description: str, employment_type: str)
-2. Address_of_job
+    Atributy:<br>
+      title: str
+      job_description: str
+      employment_type: str
+    Metody:
+      __init__(self, title: str, job_description: str, employment_type: str)
+  2. Address_of_job
 Atributy:
 country: str
 city: str
