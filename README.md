@@ -58,7 +58,6 @@
 6. Exit the program - ukončí porgram
 
 ## Hlavní Třídy
-## Třídy
 
 ### 1. Type_of_job
 - **Atributy:**
@@ -165,6 +164,14 @@
   - `select(self) -> List[Job_contract]`
   - `delete(self, value: (str, int))`
   - `update(self, value: (int, str), set_ending_date: (date, str))`
+ 
+### Regex Handler
+-```python
+@classmethod
+def check_regex_email(cls, email: str):
+    regex_rule = r'^[\w\.]+\@([\w-]+\.)+[\w-]{2,4}$'
+    if not re.match(regex_rule, email):
+        raise Exception(f"The email \"{email}\" was not entered validly!")
 
 ## Konfigurační soubor
 - Všechno potřebné je nastaveno v souboru config.ini, který lze najít ve složce config/config.ini.
