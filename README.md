@@ -166,12 +166,78 @@
   - `update(self, value: (int, str), set_ending_date: (date, str))`
  
 ### Regex Handler
--```python
-@classmethod
-def check_regex_email(cls, email: str):
-    regex_rule = r'^[\w\.]+\@([\w-]+\.)+[\w-]{2,4}$'
-    if not re.match(regex_rule, email):
-        raise Exception(f"The email \"{email}\" was not entered validly!")
+- třída obsahuje metody pro kontrolu vstupních hodnot ponocí regexů
+- **Metody:**
+  - `check_regex_email(cls, email: str)`
+  - `check_regex_phone(cls, phone: str)`
+  - `check_regex_date(cls, date: str)`
+  - `check_regex_words(cls, words: str)`
+  - `check_regex_description(cls, description: str)`
+  - `check_regex_type_of_job(cls, type_of_job: str)`
+  - `check_regex_street(cls, street: str)`
+
+### Database
+- třída obsahuje metody pro práci s databází
+- **Metody:**
+  - `set_up_connection(self)`
+  - `execute(self, query)`
+  - `execute_with_return(self, query)`
+  - `restart(self)`
+  - `drop_db(self)`
+  - `create_db(self)`
+  - `load_view(self, name_of_view: str)`
+  - `print_view(self, name_of_view: str)`
+  - `format_select(cls, data: list, response: str)`
+  - `check_employer_transaction(self, employer_data: str)`
+  - `check_customer_transaction(self, customer_data: str)`
+  - `transaction(self, employer_data: str, customer_data: str)`
+
+##MVC
+### Model
+- **Metody:**
+  - `restart(self)`
+  - `import_data_from_csv(self)`
+  - `contract_details_view_report(self)`
+  - `job_summary_view_report(self)`
+  - `transaction(self, data1: str, data2: str)`
+  - `db_select(self, dao, attr: list, end: str)`
+  - `db_insert(cls, dao, db_object)`
+  - `db_update(cls, dao, value: str, set_to: str)`
+  - `db_delete(cls, dao, value: str)`
+### View
+- **Metody:**
+  - `reset(self)`
+  - `print_line(self, symbol="=")`
+  - `print_message(self)`
+  - `print_report(self)`
+  - `table_menu_input(self)`
+  - `crud_menu_input(self)`
+  - `main_menu_input(self)`
+  - `transaction_input(self)`
+  - `crud_input(self)`
+  - `print_select_db_crud(self)`
+  - `print_insert_db_crud(self)`
+  - `print_update_db_crud(self)`
+  - `print_delete_db_crud(self)`
+  - `import_db_data(self)`
+  - `confirm_remove(cls, question: str)`
+  - `update(self)`
+### Contreoller
+- **Metody:**
+  - `run(self)`
+  - `terminate(self)`
+  - `show_crud_input(self, crud_table: str)`
+  - `show_table_menu_input(self, crud_command: str)`
+  - `print_report(self)`
+  - `show_crud_menu_input(self)`
+  - `exe_select_crud(self)`
+  - `exe_insert_crud(self)`
+  - `exe_update_crud(self)`
+  - `exe_delete_crud(self)`
+  - `show_transaction_input(self)`
+  - `do_transaction(self)`
+  - `import_data(self)`
+  - `restart_db(self)`
 
 ## Konfigurační soubor
 - Všechno potřebné je nastaveno v souboru config.ini, který lze najít ve složce config/config.ini.
