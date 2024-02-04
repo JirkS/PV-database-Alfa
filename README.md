@@ -58,101 +58,113 @@
 6. Exit the program - ukončí porgram
 
 ## Hlavní Třídy
-Třídy:
-  1. Type_of_job
-    Atributy:<br>
-      title: str
-      job_description: str
-      employment_type: str
-    Metody:
-      __init__(self, title: str, job_description: str, employment_type: str)
-  2. Address_of_job
-Atributy:
-country: str
-city: str
-street: str
-postal_code: int
-Metody:
-__init__(self, country: str, city: str, street: str, postal_code: int)
-3. Job
-Atributy:
-employer_id: int
-type_of_job_id: int
-address_of_job_id: int
-salary: float
-is_active: bool
-Metody:
-__init__(self, employer_id: int, type_of_job_id: int, address_of_job_id: int, salary: float, is_active: bool)
-4. Customer
-Atributy:
-first_name: str
-surname: str
-email: str
-phone: str
-amount_of_money: float
-Metody:
-__init__(self, first_name: str, surname: str, email: str, phone: str, amount_of_money: float)
-5. Employee
-Atributy:
-first_name: str
-surname: str
-email: str
-phone: str
-birth_date: str
-is_active: bool
-Metody:
-__init__(self, first_name: str, surname: str, email: str, phone: str, birth_date: str, is_active: bool)
-6. Job_contract
-Atributy:
-job_id: int
-customer_id: int
-employee_id: int
-starting_date: str
-ending_date: str
-Metody:
-__init__(self, job_id: int, customer_id: int, employee_id: int, starting_date: str, ending_date: str)
-7. Type_of_jobDAO
-Metody:
-__init__(self, database: Database)
-insert(self, type_of_job: Type_of_job)
-select(self) -> List[Type_of_job]
-delete(self, value: (int, str))
-update(self, value: (int, str), job_description: str)
-8. Address_of_jobDAO
-Metody:
-__init__(self, database: Database)
-insert(self, address_of_job: Address_of_job)
-select(self) -> List[Address_of_job]
-delete(self, value: str)
-update(self, value: (int, str), street: str)
-9. JobDAO
-Metody:
-__init__(self, database: Database)
-insert(self, job: Job)
-select(self) -> List[Job]
-delete(self, value: (str, int))
-update(self, value: (int, str), salary: str)
-10. CustomerDAO
-Metody:
-__init__(self, database: Database)
-insert(self, customer: Customer)
-select(self) -> List[Customer]
-delete(self, value: (int, str))
-update(self, value: (int, str), amount_of_money: str)
-11. EmployeeDAO
-Metody:
-__init__(self, database: Database)
-insert(self, employee: Employee)
-select(self) -> List[Employee]
-delete(self, value: (int, str))
-update(self, value: (int, str), is_active: (str, int))
-12. Job_contractDAO
-Metody:
-__init__(self, database: Database)
-insert(self, job_contract: Job_contract)
-select(self) -> List[Job_contract]
-delete(self, value: (str, int))
-update(self, value: (int, str), set_ending_date: (date, str))
+## Třídy
+
+### 1. Type_of_job
+- **Atributy:**
+  - `title`: str
+  - `job_description`: str
+  - `employment_type`: str
+- **Metody:**
+  - `__init__(self, title: str, job_description: str, employment_type: str)`
+
+### 2. Address_of_job
+- **Atributy:**
+  - `country`: str
+  - `city`: str
+  - `street`: str
+  - `postal_code`: int
+- **Metody:**
+  - `__init__(self, country: str, city: str, street: str, postal_code: int)`
+
+### 3. Job
+- **Atributy:**
+  - `employer_id`: int
+  - `type_of_job_id`: int
+  - `address_of_job_id`: int
+  - `salary`: float
+  - `is_active`: bool
+- **Metody:**
+  - `__init__(self, employer_id: int, type_of_job_id: int, address_of_job_id: int, salary: float, is_active: bool)`
+
+### 4. Customer
+- **Atributy:**
+  - `first_name`: str
+  - `surname`: str
+  - `email`: str
+  - `phone`: str
+  - `amount_of_money`: float
+- **Metody:**
+  - `__init__(self, first_name: str, surname: str, email: str, phone: str, amount_of_money: float)`
+
+### 5. Employee
+- **Atributy:**
+  - `first_name`: str
+  - `surname`: str
+  - `email`: str
+  - `phone`: str
+  - `birth_date`: str
+  - `is_active`: bool
+- **Metody:**
+  - `__init__(self, first_name: str, surname: str, email: str, phone: str, birth_date: str, is_active: bool)`
+
+### 6. Job_contract
+- **Atributy:**
+  - `job_id`: int
+  - `customer_id`: int
+  - `employee_id`: int
+  - `starting_date`: str
+  - `ending_date`: str
+- **Metody:**
+  - `__init__(self, job_id: int, customer_id: int, employee_id: int, starting_date: str, ending_date: str)`
+
+### 7. Type_of_jobDAO
+- **Metody:**
+  - `__init__(self, database: Database)`
+  - `insert(self, type_of_job: Type_of_job)`
+  - `select(self) -> List[Type_of_job]`
+  - `delete(self, value: (int, str))`
+  - `update(self, value: (int, str), job_description: str)`
+
+### 8. Address_of_jobDAO
+- **Metody:**
+  - `__init__(self, database: Database)`
+  - `insert(self, address_of_job: Address_of_job)`
+  - `select(self) -> List[Address_of_job]`
+  - `delete(self, value: str)`
+  - `update(self, value: (int, str), street: str)`
+
+### 9. JobDAO
+- **Metody:**
+  - `__init__(self, database: Database)`
+  - `insert(self, job: Job)`
+  - `select(self) -> List[Job]`
+  - `delete(self, value: (str, int))`
+  - `update(self, value: (int, str), salary: str)`
+
+### 10. CustomerDAO
+- **Metody:**
+  - `__init__(self, database: Database)`
+  - `insert(self, customer: Customer)`
+  - `select(self) -> List[Customer]`
+  - `delete(self, value: (int, str))`
+  - `update(self, value: (int, str), amount_of_money: str)`
+
+### 11. EmployeeDAO
+- **Metody:**
+  - `__init__(self, database: Database)`
+  - `insert(self, employee: Employee)`
+  - `select(self) -> List[Employee]`
+  - `delete(self, value: (int, str))`
+  - `update(self, value: (int, str), is_active: (str, int))`
+
+### 12. Job_contractDAO
+- **Metody:**
+  - `__init__(self, database: Database)`
+  - `insert(self, job_contract: Job_contract)`
+  - `select(self) -> List[Job_contract]`
+  - `delete(self, value: (str, int))`
+  - `update(self, value: (int, str), set_ending_date: (date, str))`
 
 ## Konfigurační soubor
 - Všechno potřebné je nastaveno v souboru config.ini, který lze najít ve složce config/config.ini.
