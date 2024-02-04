@@ -239,6 +239,8 @@
   - `import_data(self)`
   - `restart_db(self)`
 
+![UML diagram](https://github.com/JirkS/PV-database-Alfa/blob/main/UMLClassDiagram.drawio.png)
+
 ## Konfigurační soubor
 - Všechno potřebné je nastaveno v souboru config.ini, který lze najít ve složce config/config.ini.
 - Pro uživatele jsou k dispozici části "USER-STATIC" - základní nastavení.
