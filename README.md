@@ -20,6 +20,8 @@
 - Employee
 - JobContract
 
+
+
 ## Funcionalita
 - Program má za úkol zredukovat velikost textového souboru, tedy zkomprimovat textový soubor.
 - Na začátku program vypíše nápovědu, jak používat program a ovládat ho pomocí konfiguračního souboru ve složce "config/config.ini".
