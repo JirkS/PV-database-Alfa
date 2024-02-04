@@ -29,7 +29,7 @@
 
 - Ujistěte se že databáze vypadá takto:
   
-![db diagram](https://github.com/JirkS/PV-database-Alfa/blob/main/EmploymentDepartmentDiagramRelational.png)
+![structure of db](https://github.com/JirkS/PV-database-Alfa/blob/main/Screenshot%202024-02-04%20215535.jpg)
 
 ## Funcionalita
 - Program má za úkol poskutovat práci a kontrolu pro databází úřadu práce.
