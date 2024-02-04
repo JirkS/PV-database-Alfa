@@ -43,51 +43,140 @@
 - spustíme si windows cmd
 - dojdeme pomocí příslušných příkazů do složky projektu (DatabaseAlfa)
 - poté program spustíme pomocí příkazu: "python main.py"
-- musíte mít zárověn běžící databázi, v defaultním nastavení databáze běží na serveru autora a není potřeba nic měnit, jinak je třeba změnit nastavení databáze v config.ini ve složce config pro připojení do databáze, vytvořit databázi pomocí scriptu "scriptToCreateDB.txt" ve složce "doc/database/"
+- musíte mít zárověn běžící databázi, v defaultním nastavení databáze běží na serveru autora a není potřeba nic měnit, jinak je třeba změnit nastavení databáze v config.ini ve složce config pro připojení do databáze, vytvořit databázi na localu pomocí scriptu v SSMS "scriptToCreateDB.txt" ve složce "doc/database/"
+
+## Návrhové vzory
+- DAO - pro všechny tabulky databáze je vytvořená třída, která obsahuje CRUD - 4 základní operace pro práci s tabulkou: SELECT, INSERT, UPDATE, DELETE
+- MVC - program je postavený na architektonickém vrozu: model - view - controller
+
+## Struktura poragramu
+1. CRUD - základní práce s tabulkami, po výběru si vybereze ze 4 ackcí s db a poté si vyberete s jako tabulkou chcete daný úkon provádět
+2. Transaction salary based on Job from Employer to Customer - po zadání jste tázán pro zadání id nebo emailu employera a poté pro customera, poté se provede transakce peněz mezi zamestnavatelem a zakazníkem
+3. Print report - vypíše 2 souhrnné reporty pro databázi
+4. Import data from csv file - importuje data z .csv souboru nastaveném v konfiguračním souboru config.ini !!! Data musí být v .csv souboru zaznamenána ve správném formátu, příklad je uveden ve složce doc/CsvFileFormatDataToImportExample.csv
+5. Restart db - restartuje databázi (smaže všechny tabulky a opětovně je vytvoří)
+6. Exit the program - ukončí porgram
 
 ## Hlavní Třídy
-### Compressor
-- Třída obsahuje metody pro kompletní kompresi textového souboru.
-#### metody:
-- compress() - spouští všechny metody pro kompresi
-- count_num_of_words() - spočítá všechny slova v textovém souboru
-- fill_dic_by_the_most_common_words() - naplní list slovy s největší četností - využití frekvenční analýzi
-- fill_dic_of_two_word_phrases() - naplní dictionary dvěma nejčastějšími slovními spojeními o dvou slovech
-- fill_dic_of_abbreviation() - naplní dictionary slovy společně s jejich zkratkami podle frekvenční anlýzi
-- delete_short_sentences() - smaže nepodstatné, nedůležité a krátké nicneřikající věty
-- delete_useless_words() - smaže nicneříkající, výplňová slova
-- replace_words_with_abbreviations() - vymění slova za zkratky
-- replace_words_of_coupling_synonyms() - vymění slova se stejným významem za nejkratší možnost
-- replace_words_with_abbreviations_from_dictionary() - vymění slova za zkratky, které se vybraly
-- fill_best_of_rest_of_the_most_common_words() - naplní list zbylými, nejvíce častými slovy
-- replace_words_for_symbols() - vymění slova za vygenerované symboly
-- write_csv_file() - zapíše slovník do csv souboru
-- check_directory_path() - zkontroluje správnost cesty
-- write_final_text_file() - zapíše finání verzi zkomprimovaného souboru
-- Tato třída generuje různé verze rozvrhů pomocí náhodného vybírání předmětů. Pravděpodobnost, že se budou jakékoliv předměty totžné, je velmi mizivá. Každopádně i tyto varianty jsou bezpečně ohlídané, aby k nim nedocházelo. Třída slouží převážně pro vygenerování co nejvíce různých rozvrhů a nezáleží na tom, jak moc jsou kvalitní. Jde zkrátko o to, vygenerovat jich co nejvíce.
-### Loader
-- Obsahuje metody pro načítání statických souborů ".json" a ".txt".
-- Kontroluje správnost cest.
-### Template
-- Tato třída obsahuje listy a dictionary, keteré obsahují načtené hodnoty ze statických souborů ".json".
-### Logger
-- Tato třída slouží pro zapisování do log souborů (ingo.log a error.log ve složce log/) 
-- Obsahuje metodu pro filtraci informací z informačního log souboru pro výpis před ukočením programu.
-
-## Pravidla a způsob čtení zkomprimovaného textového souboru
-- Textový soubor musí být napsán v jazyce výhradně českém s kompletní diakritikou.
-- Zkomprimovaný soubor lze plně přečíst pomocí slovníků v output složce.
+Třídy:
+1. Type_of_job
+Atributy:
+title: str
+job_description: str
+employment_type: str
+Metody:
+__init__(self, title: str, job_description: str, employment_type: str)
+2. Address_of_job
+Atributy:
+country: str
+city: str
+street: str
+postal_code: int
+Metody:
+__init__(self, country: str, city: str, street: str, postal_code: int)
+3. Job
+Atributy:
+employer_id: int
+type_of_job_id: int
+address_of_job_id: int
+salary: float
+is_active: bool
+Metody:
+__init__(self, employer_id: int, type_of_job_id: int, address_of_job_id: int, salary: float, is_active: bool)
+4. Customer
+Atributy:
+first_name: str
+surname: str
+email: str
+phone: str
+amount_of_money: float
+Metody:
+__init__(self, first_name: str, surname: str, email: str, phone: str, amount_of_money: float)
+5. Employee
+Atributy:
+first_name: str
+surname: str
+email: str
+phone: str
+birth_date: str
+is_active: bool
+Metody:
+__init__(self, first_name: str, surname: str, email: str, phone: str, birth_date: str, is_active: bool)
+6. Job_contract
+Atributy:
+job_id: int
+customer_id: int
+employee_id: int
+starting_date: str
+ending_date: str
+Metody:
+__init__(self, job_id: int, customer_id: int, employee_id: int, starting_date: str, ending_date: str)
+7. Type_of_jobDAO
+Metody:
+__init__(self, database: Database)
+insert(self, type_of_job: Type_of_job)
+select(self) -> List[Type_of_job]
+delete(self, value: (int, str))
+update(self, value: (int, str), job_description: str)
+8. Address_of_jobDAO
+Metody:
+__init__(self, database: Database)
+insert(self, address_of_job: Address_of_job)
+select(self) -> List[Address_of_job]
+delete(self, value: str)
+update(self, value: (int, str), street: str)
+9. JobDAO
+Metody:
+__init__(self, database: Database)
+insert(self, job: Job)
+select(self) -> List[Job]
+delete(self, value: (str, int))
+update(self, value: (int, str), salary: str)
+10. CustomerDAO
+Metody:
+__init__(self, database: Database)
+insert(self, customer: Customer)
+select(self) -> List[Customer]
+delete(self, value: (int, str))
+update(self, value: (int, str), amount_of_money: str)
+11. EmployeeDAO
+Metody:
+__init__(self, database: Database)
+insert(self, employee: Employee)
+select(self) -> List[Employee]
+delete(self, value: (int, str))
+update(self, value: (int, str), is_active: (str, int))
+12. Job_contractDAO
+Metody:
+__init__(self, database: Database)
+insert(self, job_contract: Job_contract)
+select(self) -> List[Job_contract]
+delete(self, value: (str, int))
+update(self, value: (int, str), set_ending_date: (date, str))
 
 ## Konfigurační soubor
 - Všechno potřebné je nastaveno v souboru config.ini, který lze najít ve složce config/config.ini.
 - Pro uživatele jsou k dispozici části "USER-STATIC" - základní nastavení.
 ### "[DB]":
 - driver = {ODBC Driver 17 for SQL Server}
-- server = 193.85.203.188
-- database = syrovatko
-- uid = syrovatko
-- pwd = SqlJirk5
+- server = ip adresa nebo jmeoo serveru (193.85.203.188)
+- database = jmeno databáze (syrovatko)
+- uid = prihlasovaci jmeno (syrovatko)
+- pwd = heslo
+- VŠE JE NASTAVENO DEFAULTNĚ V config.ini PRO SERVER => NENÍ POTŘEBA NIC MĚNIT (včetně hesla)
 ### "[USER-STATIC]":
 - csv_import_data_file = zadejte cestu k .csv souboru, který chcete importovat. Defaultně je cesta nastavená na složku input/nazev_souboru.csv
+
+## Chybové stavy
+- Chyby můžou nasta s požadavky na databázi, která je špatně nekonfigurovaná v config.ini, nebo dotaz na databázi je neproveditelný
+- program hlídá chybové stavy: Exception, ValueError, IndexError, FileNotFoundError, PermissionError
+
+## Knihovny třetích stran
+- Program využívá jedné knihovny ve třídě database, která ji používá pro připojení k databázi a přáci s ní: import pyodbc
+
+## Závěrečné resumé
+- Tento program byl vyvíjen v rámci domácí úlohy Alfa 3  Databázový systém pro povinný maturitní předmět Programové Vybavení.
+- Technologie, které program využívá jsou vyučovány ve škole v povinném maturitním předmětu PV - programové vybavení a volitelném maturitním předmětu DS - databázové systémy
+- Projekt byl vyvíjen něco málo přes 50 hodin.
 
 
