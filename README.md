@@ -5,6 +5,11 @@
 - škola: SPŠE Ječná
 - Jedná se o projekt školní.
 
+## Využité technologie
+- Python
+- SQL
+- SSMS - databáze vytvořená lokálně nebo na serveru
+
 ## Práce s programem
 - uživatel pracuje s programem pomocí zadávání čísel z výběru
 - u zadávání vlastností objektů databáze je za potřebí zadat požadovanou hodnotu
@@ -22,19 +27,21 @@
 
 ![db diagram](https://github.com/JirkS/PV-database-Alfa/blob/main/EmploymentDepartmentDiagramRelational.png)
 
+
+
 ## Funcionalita
-- Program má za úkol zredukovat velikost textového souboru, tedy zkomprimovat textový soubor.
-- Na začátku program vypíše nápovědu, jak používat program a ovládat ho pomocí konfiguračního souboru ve složce "config/config.ini".
-- Na konci program vypíše logy z loggovacího souboru podle hodnot nastavených uživatelem v konfiguračním souboru.
-- Při prvním zapnutí jsou v konfiguračním souboru nastaveny defaultní hodnoty.
-- Zkompromovaný soubor má zachováný smysl a je stále k přečtení s využitím všech slovníků v output složce.
+- Program má za úkol poskutovat práci a kontrolu pro databází úřadu práce.
+- Na začátku program vypíše main menu, kde je CRUD pro praci s tabulkami, transakce, print report, improt dat z .csv souboru, restarovani databáze (smazání a vytvoření tabulek) a exit program.
+- Pomocí zadávání čísel v daném rozmezí podle příkazů uživatel vybírá akce.
+- Je mu dostáváná zpětná vazba a je pobízen k zadávání určitých hodnot potřebné pro vybraný příkaz.
 
 ## Instalace a spuštění
 - pro úspěšné zapnutí programu je zapotřebí mít na zařízení nainstalovaný python
 - stáhneme si zip soubor a extrahujeme ho
 - spustíme si windows cmd
-- dojdeme pomocí příslušných příkazů do složky projektu (kompreseSouboruAlfa)
+- dojdeme pomocí příslušných příkazů do složky projektu (DatabaseAlfa)
 - poté program spustíme pomocí příkazu: "python main.py"
+- musíte mít zárověn běžící databázi, v defaultním nastavení databáze běží na serveru autora a není potřeba nic měnit, jinak je třeba změnit nastavení databáze v config.ini ve složce config pro připojení do databáze, vytvořit databázi pomocí scriptu "scriptToCreateDB.txt" ve složce "doc/database/"
 
 ## Hlavní Třídy
 ### Compressor
@@ -71,29 +78,14 @@
 
 ## Konfigurační soubor
 - Všechno potřebné je nastaveno v souboru config.ini, který lze najít ve složce config/config.ini.
-- Pro uživatele jsou k dispozici části "USER-STATIC" - základní nastavení a "USER-LOG" - pro tisk konkrétních informací ze souboru s protokolem.
+- Pro uživatele jsou k dispozici části "USER-STATIC" - základní nastavení.
+### "[DB]":
+- driver = {ODBC Driver 17 for SQL Server}
+- server = 193.85.203.188
+- database = syrovatko
+- uid = syrovatko
+- pwd = SqlJirk5
 ### "[USER-STATIC]":
-- text_file_path = zadejte cestu k textovému souboru, který chcete komprimovat.
-- path_to_save_output_files = zadejte cestu k adresáři, kde budou uloženy všechny výstupní soubory (komprimovaný textový soubor a další soubory).
-- name_of_final_text_file = zadejte název konečného komprimovaného textového souboru
+- csv_import_data_file = zadejte cestu k .csv souboru, který chcete importovat. Defaultně je cesta nastavená na složku input/nazev_souboru.csv
 
-### "[USER-LOG]":
-- wants_print_logs = vyberte, zda skutečně chcete vypsat nějaké informace
-    možnosti: "Y" - ano, "N" - ne
-- Filtrujte podle toho, kdy byla provedena informace/změna komprese.
-- start_date_time = vyberte počáteční datum a čas ve formátu "Y-m-d H:M:S" rozsahu informací
-    možnosti: formát data a času (například: "2024-01-09 20:36:08"), "last_run" - filtrujte pouze informace z posledního běhu, "None" - nezajímá vás tato možnost, filtr nebude brat tuto hodnotu v potaz
-- end_date_time = vyberte konečný datum a čas ve formátu "Y-m-d H:M:S" rozsahu infromací
-    možnosti: formát data a času (například: "2024-01-09 20:36:08"), "last_run" - filtrujte pouze informace z posledního běhu, "None" - nezajímá vás tato možnost, filtr nebude brat tuto hodnotu v potaz
-    poznámka: Chcete-li filtrovat informace v protokolu podle data a času, musíte nastavit obě proměnné "start_date_time" a také "end_date_time" s totožným typem hodnot
-- Filtrujte podle toho, jakým skórem byla změna komprese hodnocena. (od "0" po kladná čísla)
-- min_score = vyberte minimální hodnotu skóre
-    možnosti: číslo (například: "6", "0"), "None" - nezajímá vás tato možnost, filtr nebude brat tuto hodnotu v potaz
-- max_score = vyberte maximální hodnotu skóre
-    možnosti: číslo (například: "12", "5"), "None" - nezajímá vás tato možnost, filtr nebude brat tuto hodnotu v potaz
-    poznámka: Chcete-li filtrovat informace podle skóre, musíte nastavit obě proměnné "min_score" a také "max_score" s totožným typem hodnot
-- type_of_change = vyberte, jaký typ změny byl proveden v kompresi
-  možnosti: "zkráceno", "nahrazeno", "symbolizováno", "None" - nezajímá vás tato možnost, filtr nebude brát tuto hodnotu v potaz
-- Komprimovaný textový soubor, který lze přečíst, bude ve složce, kterou nastavíte v config.ini, spolu s dalšími soubory, jako jsou slovník zkratky a slovník symbolů.
-- Tyto soubory jsou nutné použít k správnému čtení komprimovaného textového souboru
-- Pokud je v zkomprimovaném textovém souboru otazník a za ním nějaký symbol, tento symbol má k sobě přířazené slovo ve slovníku.
+
