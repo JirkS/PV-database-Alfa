@@ -20,7 +20,7 @@
 - Employee
 - JobContract
 
-(https://github.com/JirkS/PV-database-Alfa/blob/main/EmploymentDepartmentDiagramRelational.png)
+![db diagram](https://github.com/JirkS/PV-database-Alfa/blob/main/EmploymentDepartmentDiagramRelational.png)
 
 ## Funcionalita
 - Program má za úkol zredukovat velikost textového souboru, tedy zkomprimovat textový soubor.
