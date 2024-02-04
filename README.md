@@ -20,6 +20,68 @@
 - Employee
 - JobContract
 
+create table Employer(
+id int primary key identity(1,1),
+first_name varchar(20) not null,
+surname varchar(30) not null,
+email varchar(50) not null unique check(email like '%@%.%'),
+phone varchar(16) not null,
+amount_of_money int not null check(amount_of_money >= 0),
+is_hiring bit not null
+);
+
+create table TypeOfJob(
+id int primary key identity(1,1),
+title varchar(20) not null unique,
+job_description varchar(255),
+employment_type varchar(20) not null check(employment_type in ('Full-time', 'Part-time', 'Contract', 'Internship', 'Brigade'))
+);
+
+create table AddressOfJob(
+id int primary key identity(1,1), 
+country varchar(50) not null,
+city varchar(50) not null,
+street varchar(50) not null,
+postal_code int not null unique check(postal_code > 0)
+);
+
+create table Job(
+id int primary key identity(1,1),
+employer_id int not null foreign key references Employer(id),
+typeofjob_id int not null foreign key references TypeOfJob(id),
+addressofjob_id int not null foreign key references AddressOfJob(id),
+salary float not null check(salary > 0),
+is_active bit not null
+);
+
+create table Customer(
+id int primary key identity(1,1),
+first_name varchar(20) not null,
+surname varchar(30) not null,
+email varchar(50) not null unique check(email like '%@%.%'),
+phone varchar(16) not null,
+amount_of_money int not null check(amount_of_money >= 0)
+);
+
+create table Employee(
+id int primary key identity(1,1),
+first_name varchar(20) not null,
+surname varchar(30) not null,
+email varchar(50) not null unique check(email like '%@%.%'),
+phone varchar(16) not null,
+birth_date datetime not null check(birth_date < getdate()),
+is_active bit not null
+);
+
+create table JobContract(
+id int primary key identity(1,1),
+job_id int not null foreign key references Job(id),
+customer_id int not null foreign key references Customer(id),
+employee_id int not null foreign key references Employee(id),
+starting_date datetime not null,
+ending_date datetime not null,
+);
+
 ![db diagram](https://github.com/JirkS/PV-database-Alfa/blob/main/EmploymentDepartmentDiagramRelational.png)
 
 ## Funcionalita
